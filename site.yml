@@ -19,5 +19,5 @@
 
   - name: Extract executable from PCAP
     copy:
-      src: nimda.download.pcap
-      dest: /pcap
+      src: /var/nimda.download.pcap
+      dest: /tmp/
