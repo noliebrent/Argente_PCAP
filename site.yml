@@ -18,6 +18,6 @@
     when: ansible_distribution == "Ubuntu"
 
   - name: Extract executable from PCAP
-    extract:
+    copy:
       src: nimda.download.pcap
-      output_dir: /pcap
+      dest: /pcap
