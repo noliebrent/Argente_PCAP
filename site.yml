@@ -10,3 +10,19 @@
      update_cache: yes
     changed_when: false
     when: ansible_distribution == "Ubuntu"
+
+   - name: Copy PCAP file from CN
+      fetch:
+        src: /path/to/pcap/file.pcap
+        dest: /tmp/file.pcap
+        flat: yes
+        fail_on_missing: yes
+        validate_checksum: yes
+
+    - name: Extract executable from PCAP file
+      command: "/usr/bin/extract_executable /tmp/file.pcap"
+      register: executable_output
+
+    - name: Print executable output
+      debug:
+        var: executable_output.stdout
