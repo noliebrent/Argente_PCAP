@@ -13,11 +13,11 @@
 
   - name: Install required packages
     apt:
-      name: tcpdump
+      name: tshark
       state: present
     when: ansible_distribution == "Ubuntu"
 
   - name: Extract executable from PCAP
     copy:
       src: /var/nimda.download.pcap
-      dest: /tmp/
+      dest: /tmp/pcap
