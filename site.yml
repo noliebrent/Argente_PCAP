@@ -6,23 +6,18 @@
 
   - name: Install Updates
     apt:
-     upgrade: dist
-     update_cache: yes
+      upgrade: dist
+      update_cache: yes
     changed_when: false
     when: ansible_distribution == "Ubuntu"
 
-   - name: Copy PCAP file from CN
-      fetch:
-        src: /path/to/pcap/file.pcap
-        dest: /tmp/file.pcap
-        flat: yes
-        fail_on_missing: yes
-        validate_checksum: yes
+  - name: Install required packages
+    apt:
+      name: tcpdump
+      state: present
+    when: ansible_distribution == "Ubuntu"
 
-    - name: Extract executable from PCAP file
-      command: "/usr/bin/extract_executable /tmp/file.pcap"
-      register: executable_output
-
-    - name: Print executable output
-      debug:
-        var: executable_output.stdout
+  - name: Extract executable from PCAP
+    extract:
+      src: nimda.download.pcap
+      output_dir: /pcap
