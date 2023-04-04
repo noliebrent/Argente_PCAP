@@ -17,7 +17,15 @@
       state: present
     when: ansible_distribution == "Ubuntu"
 
+  - name: Start and Manual capturing 
+    command: tshark -i enp0s8 -w capture.pcap
+    async: 120
+    poll: 0
+  
+  - name: Make it executable the pcap
+    command: chmod +x capture.pcap
+ 
   - name: Extract executable from PCAP
     copy:
-      src: /var/nimda.download.pcap
+      src: /home/argente/Argente_PCAP/capture.pcap
       dest: /tmp/pcap
